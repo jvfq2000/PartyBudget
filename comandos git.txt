@@ -1,1 +1,2 @@
 git clone https://github.com/jvfq2000/PartyBudget.git
+git pull origin master
