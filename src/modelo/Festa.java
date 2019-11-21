@@ -1,9 +1,13 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Festa extends Base{
-    String local, descricao;
+    private String local, descricao;
     private String dataInicial, dataFinal;
     private String horaInicial, horaFinal;
+    public ArrayList<Produto> listaProduto = new ArrayList<>();
+    public ArrayList<Categoria> listaCatProduto = new ArrayList<>();
     
     private int codCategoria;
 

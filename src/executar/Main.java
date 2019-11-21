@@ -1,6 +1,7 @@
 package executar;
 
 import base_dados.BaseDados;
+import gerenciar.InterFrameGerenciarFesta;
 import manter.InterFrameCategoria;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -131,7 +132,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        InterFrameGerenciarFesta interFrameGerenciarFesta = new InterFrameGerenciarFesta();
+        dpanelPrincipal.add(interFrameGerenciarFesta);
+        interFrameGerenciarFesta.setLocation(dpanelPrincipal.getWidth() / 2 - interFrameGerenciarFesta.getWidth() / 2,
+                dpanelPrincipal.getHeight() / 2 - interFrameGerenciarFesta.getHeight() / 2);
+        interFrameGerenciarFesta.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
