@@ -5,20 +5,12 @@ public class Produto extends Base{
     private Double precoUnitario;
     
     private int codCategoria;
-    private int codFesta;
 
     public int getCodCategoria() {
         return codCategoria;
     }
     public void setCodCategoria(int codCategoria) {
         this.codCategoria = codCategoria;
-    }
-
-    public int getCodFesta() {
-        return codFesta;
-    }
-    public void setCodFesta(int codFesta) {
-        this.codFesta = codFesta;
     }
 
     public int getQuantidade() {
@@ -35,10 +27,9 @@ public class Produto extends Base{
         this.precoUnitario = preco;
     }
     
-    public void cadastrarOuAlterar(String nome, int qtdProduto, double preUnit, int codCat, int codFes){
+    public void cadastrarOuAlterar(String nome, int qtdProduto, double preUnit, int codCat){
         cadastrarOuAlterar(nome);
         setCodCategoria(codCat);
-        setCodFesta(codFes);
         setPrecoUnitario(preUnit);
         setQuantidade(qtdProduto);
     }

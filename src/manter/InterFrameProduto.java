@@ -367,8 +367,7 @@ public class InterFrameProduto extends javax.swing.JInternalFrame {
                     txtDescricaoProduto.getText(),
                     qtd,
                     preco,
-                    listaCodCat[cbbCategoria.getSelectedIndex() - 1],
-                    0
+                    listaCodCat[cbbCategoria.getSelectedIndex() - 1]
             );
 
             BaseDados.listaProduto.add(novoProduto);
@@ -393,8 +392,7 @@ public class InterFrameProduto extends javax.swing.JInternalFrame {
                     txtDescricaoProduto.getText(),
                     qtd,
                     preco,
-                    listaCodCat[cbbCategoria.getSelectedIndex() - 1],
-                    0
+                    listaCodCat[cbbCategoria.getSelectedIndex() - 1]
             );
             dtm.setValueAt(BaseDados.listaProduto.get(posProduto).getCODIGO(), posProduto, 0);
             dtm.setValueAt(BaseDados.listaProduto.get(posProduto).getNome(), posProduto, 0);

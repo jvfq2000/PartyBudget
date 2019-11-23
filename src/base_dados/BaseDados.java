@@ -44,19 +44,19 @@ public class BaseDados {
         BaseDados.listaFesta.add(festa);
         
         produto = new Produto();
-        produto.cadastrarOuAlterar("REFRIGERANTE LATA 500ML", 50, 2.5, 1, 0);
+        produto.cadastrarOuAlterar("REFRIGERANTE LATA 500ML", 50, 2.5, 1);
         BaseDados.listaProduto.add(produto);
         
         produto = new Produto();
-        produto.cadastrarOuAlterar("SUCO LATA 600ML", 30, 2.5, 1, 0);
+        produto.cadastrarOuAlterar("SUCO LATA 600ML", 30, 2.5, 1);
         BaseDados.listaProduto.add(produto);
 
         produto = new Produto();
-        produto.cadastrarOuAlterar("BIFE 1KG", 5, 10, 2, 0);
+        produto.cadastrarOuAlterar("BIFE 1KG", 5, 10, 2);
         BaseDados.listaProduto.add(produto);
         
         produto = new Produto();
-        produto.cadastrarOuAlterar("ALFACE 1PÉ", 3, 3, 2, 0);
+        produto.cadastrarOuAlterar("ALFACE 1PÉ", 3, 3, 2);
         BaseDados.listaProduto.add(produto);
     }
 }
