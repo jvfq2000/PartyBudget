@@ -18,29 +18,6 @@ public class BaseDados {
     private Produto produto;
     private Festa festa;
 
-    public static boolean validaDataOuHora(String s, String format) {
-        DateFormat df = new SimpleDateFormat(format);
-        df.setLenient(false);
-        
-        try {
-            df.parse(s);
-            return true;
-        } catch (ParseException ex) {
-            return false;
-        }
-    }
-
-    public static int buscaCategoria(int codigo) {
-        int posiCat = -1;
-
-        for (int i = 0; i < listaCat.size(); i++) {
-            if (listaCat.get(i).getCODIGO() == codigo) {
-                posiCat = i;
-            }
-        }
-        return posiCat;
-    }
-
     public void cadastrar() {
         categoria = new Categoria();
         categoria.cadastrarOuAlterar("BEBIDAS", "PRODUTO");

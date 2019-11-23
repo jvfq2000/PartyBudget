@@ -7,6 +7,7 @@ package gerenciar;
 
 import base_dados.BaseDados;
 import funcao.Mensagem;
+import funcao.Validacoes;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,6 +27,9 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         for (int i = 0; i < BaseDados.listaFesta.size(); i++) {
             cbbFesta.addItem(BaseDados.listaFesta.get(i).getNome());
         }
+
+        tableCategoria.setEnabled(false);
+        btnSalvarAlter.setEnabled(false);
     }
 
     /**
@@ -70,14 +74,14 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Nome", "Adicionar"
+                "Código", "Nome", "Adicionar"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -90,8 +94,10 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tableCategoria);
         if (tableCategoria.getColumnModel().getColumnCount() > 0) {
-            tableCategoria.getColumnModel().getColumn(1).setMinWidth(80);
-            tableCategoria.getColumnModel().getColumn(1).setMaxWidth(80);
+            tableCategoria.getColumnModel().getColumn(0).setMinWidth(50);
+            tableCategoria.getColumnModel().getColumn(0).setMaxWidth(50);
+            tableCategoria.getColumnModel().getColumn(2).setMinWidth(80);
+            tableCategoria.getColumnModel().getColumn(2).setMaxWidth(80);
         }
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -197,11 +203,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbbFestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbFestaActionPerformed
-        if (dtm.getRowCount() > 0) {
-            for (int i = 0; i <= dtm.getRowCount(); i++) {
-                dtm.removeRow(0);
-            }
-        }
+        dtm.setNumRows(0);
         labelNomeFesta.setText("");
 
         if (cbbFesta.getSelectedIndex() == 0) {
@@ -216,19 +218,20 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
             labelNomeFesta.setText(BaseDados.listaFesta.get(posFesta).getNome());
 
             for (int i = 0; i < BaseDados.listaCat.size(); i++) {
-                catAdicionada = false;
-
-                for (int j = 0; j < BaseDados.listaFesta.get(posFesta).listaCatProduto.size(); j++) {
-                    if (BaseDados.listaFesta.get(posFesta).listaCatProduto.get(j).getCODIGO()
-                            == BaseDados.listaCat.get(i).getCODIGO()) {
-
-                        catAdicionada = true;
-                    }
-                }
                 if (BaseDados.listaCat.get(i).getTipoCategoria().equals("PRODUTO")) {
+                    catAdicionada = false;
+
+                    for (int j = 0; j < BaseDados.listaFesta.get(posFesta).listaCatProduto.size(); j++) {
+                        if (BaseDados.listaFesta.get(posFesta).listaCatProduto.get(j).getCODIGO()
+                                == BaseDados.listaCat.get(i).getCODIGO()) {
+
+                            catAdicionada = true;
+                        }
+                    }
                     dtm.addRow(new Object[]{
+                        BaseDados.listaCat.get(i).getCODIGO(),
                         BaseDados.listaCat.get(i).getNome(),
-                        Boolean.FALSE
+                        catAdicionada
                     });
                 }
             }
@@ -241,26 +244,27 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
             int posCatProd;
             boolean achei;
 
-            for (int i = 0; i <= dtm.getRowCount(); i++) {
+            for (int i = 0; i < dtm.getRowCount(); i++) {
                 achei = false;
                 posCatProd = -1;
+                int codCat = Integer.parseInt(dtm.getValueAt(i, 0).toString());
 
-                for (int j = 0; j < BaseDados.listaFesta.get(posFesta).listaCatProduto.size(); j++) {
-                    if (BaseDados.listaFesta.get(posFesta).listaCatProduto.get(j).getCODIGO()
-                            == BaseDados.listaCat.get(i).getCODIGO()) {
-
-                        achei = true;
-                        posCatProd = j;
+                if (BaseDados.listaFesta.get(posFesta).listaCatProduto.size() > 0) {
+                    for (int j = 0; j < BaseDados.listaFesta.get(posFesta).listaCatProduto.size(); j++) {
+                        if (BaseDados.listaFesta.get(posFesta).listaCatProduto.get(j).getCODIGO() == codCat) {
+                            achei = true;
+                            posCatProd = j;
+                        }
                     }
                 }
 
-                if (achei && dtm.getValueAt(i, 1).equals(false)) {
+                if (achei && dtm.getValueAt(i, 2).equals(false)) {
                     BaseDados.listaFesta.get(posFesta).listaCatProduto.remove(posCatProd);
-                } else if (!achei && dtm.getValueAt(i, 1).equals(true)) {
-                    BaseDados.listaFesta.get(posFesta).listaCatProduto.add(BaseDados.listaCat.get(i));
+                } else if (!achei && dtm.getValueAt(i, 2).equals(true)) {
+                    BaseDados.listaFesta.get(posFesta).listaCatProduto.add(BaseDados.listaCat.get(Validacoes.buscaCategoria(codCat)));
                 }
             }
-            Mensagem.confirmarSalvarAlter();
+            Mensagem.sucessoSalvarAlter();
         }
     }//GEN-LAST:event_btnSalvarAlterActionPerformed
 

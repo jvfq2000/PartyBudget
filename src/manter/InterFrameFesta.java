@@ -9,6 +9,7 @@ import base_dados.BaseDados;
 import com.toedter.calendar.JTextFieldDateEditor;
 import funcao.ApenasLetrasMaiusculas;
 import funcao.Mensagem;
+import funcao.Validacoes;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -52,7 +53,7 @@ public class InterFrameFesta extends javax.swing.JInternalFrame {
 
         if (BaseDados.listaFesta.size() > 0) {
             for (int i = 0; i < BaseDados.listaFesta.size(); i++) {
-                int posCat = BaseDados.buscaCategoria(BaseDados.listaFesta.get(i).getCodCategoria());
+                int posCat = Validacoes.buscaCategoria(BaseDados.listaFesta.get(i).getCodCategoria());
                 dtm.addRow(new Object[]{
                     BaseDados.listaFesta.get(i).getCODIGO(),
                     BaseDados.listaFesta.get(i).getNome(),
@@ -462,10 +463,10 @@ public class InterFrameFesta extends javax.swing.JInternalFrame {
                 Mensagem.personalizada("A 'Data Final' não pode ser menor que a 'Data Inicial'!\n"
                         + "Tesete: " + dtFim.getTimeInMillis() + " < " + dtIni.getTimeInMillis());
 
-            } else if (!BaseDados.validaDataOuHora(formatHoraInicio.getText(), "HH:mm")) {
+            } else if (!Validacoes.validaDataOuHora(formatHoraInicio.getText(), "HH:mm")) {
                 Mensagem.personalizada("Horáio inicial inválido!");
 
-            } else if (!BaseDados.validaDataOuHora(formatHoraFim.getText(), "HH:mm")) {
+            } else if (!Validacoes.validaDataOuHora(formatHoraFim.getText(), "HH:mm")) {
                 Mensagem.personalizada("Horáio final inválido!");
 
             } else {
@@ -495,7 +496,7 @@ public class InterFrameFesta extends javax.swing.JInternalFrame {
 
                         BaseDados.listaFesta.add(novaFesta);
                         int ultPos = BaseDados.listaFesta.size() - 1;
-                        int posCat = BaseDados.buscaCategoria(BaseDados.listaFesta.get(ultPos).getCodCategoria());
+                        int posCat = Validacoes.buscaCategoria(BaseDados.listaFesta.get(ultPos).getCodCategoria());
 
                         dtm.addRow(new Object[]{
                             BaseDados.listaFesta.get(ultPos).getCODIGO(),
@@ -514,7 +515,7 @@ public class InterFrameFesta extends javax.swing.JInternalFrame {
 
                     } else {
                         int posFesta = tableFesta.getSelectedRow();
-                        int posCat = BaseDados.buscaCategoria(BaseDados.listaFesta.get(posFesta).getCodCategoria());
+                        int posCat = Validacoes.buscaCategoria(BaseDados.listaFesta.get(posFesta).getCodCategoria());
 
                         BaseDados.listaFesta.get(posFesta).cadastrarOuAlterar(
                                 txtNomeFesta.getText(),

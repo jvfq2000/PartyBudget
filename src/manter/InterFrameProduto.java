@@ -8,6 +8,7 @@ package manter;
 import base_dados.BaseDados;
 import funcao.ApenasLetrasMaiusculas;
 import funcao.Mensagem;
+import funcao.Validacoes;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Produto;
@@ -40,7 +41,7 @@ public class InterFrameProduto extends javax.swing.JInternalFrame {
 
         if (BaseDados.listaProduto.size() > 0) {
             for (int i = 0; i < BaseDados.listaProduto.size(); i++) {
-                int posCat = BaseDados.buscaCategoria(BaseDados.listaProduto.get(i).getCodCategoria());
+                int posCat = Validacoes.buscaCategoria(BaseDados.listaProduto.get(i).getCodCategoria());
                 dtm.addRow(new Object[]{
                     BaseDados.listaProduto.get(i).getCODIGO(),
                     BaseDados.listaProduto.get(i).getNome(),
@@ -372,7 +373,7 @@ public class InterFrameProduto extends javax.swing.JInternalFrame {
 
             BaseDados.listaProduto.add(novoProduto);
             int ultPos = BaseDados.listaProduto.size() - 1;
-            int posCat = BaseDados.buscaCategoria(BaseDados.listaProduto.get(ultPos).getCodCategoria());
+            int posCat = Validacoes.buscaCategoria(BaseDados.listaProduto.get(ultPos).getCodCategoria());
 
             dtm.addRow(new Object[]{
                 BaseDados.listaProduto.get(ultPos).getCODIGO(),
@@ -386,7 +387,7 @@ public class InterFrameProduto extends javax.swing.JInternalFrame {
             Mensagem.sucessoCadastro();
         } else {
             int posProduto = tableProduto.getSelectedRow();
-            int posCat = BaseDados.buscaCategoria(BaseDados.listaProduto.get(posProduto).getCodCategoria());
+            int posCat = Validacoes.buscaCategoria(BaseDados.listaProduto.get(posProduto).getCodCategoria());
 
             BaseDados.listaProduto.get(posProduto).cadastrarOuAlterar(
                     txtDescricaoProduto.getText(),
