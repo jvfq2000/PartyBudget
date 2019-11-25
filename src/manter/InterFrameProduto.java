@@ -437,10 +437,10 @@ public class InterFrameProduto extends javax.swing.JInternalFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (Mensagem.confirmarExclusao() == JOptionPane.YES_OPTION) {
-            int posFesta = tableProduto.getSelectedRow();
+            int posProduto = tableProduto.getSelectedRow();
 
-            BaseDados.listaFesta.remove(posFesta);
-            dtm.removeRow(posFesta);
+            BaseDados.listaProduto.remove(posProduto);
+            dtm.removeRow(posProduto);
 
             camposInicio();
             Mensagem.sucessoExclusao();

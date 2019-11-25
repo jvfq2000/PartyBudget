@@ -38,4 +38,15 @@ public class Validacoes {
         }
         return posiCat;
     }
+    
+    public static int buscaProdutoFesta(int posFesta, int codProduto) {
+        int posiCat = -1;
+
+        for (int i = 0; i < BaseDados.listaFesta.get(posFesta).listaProduto.size(); i++) {
+            if (BaseDados.listaFesta.get(posFesta).listaProduto.get(i).getCODIGO() == codProduto) {
+                posiCat = i;
+            }
+        }
+        return posiCat;
+    }
 }

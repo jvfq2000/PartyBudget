@@ -6,6 +6,8 @@ public class Festa extends Base{
     private String local, descricao;
     private String dataInicial, dataFinal;
     private String horaInicial, horaFinal;
+    private double somaPrecoUnit, somaPrecoTotal;
+    private int somaQtd;
     public ArrayList<Produto> listaProduto = new ArrayList<>();
     public ArrayList<Categoria> listaCatProduto = new ArrayList<>();
     
@@ -58,6 +60,27 @@ public class Festa extends Base{
     }
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+    
+    public int getSomaQtd() {
+        return somaQtd;
+    }
+    public void setSomaQtd(int somaQtd) {
+        this.somaQtd = somaQtd;
+    }
+
+    public Double getSomaPrecoUnit() {
+        return somaPrecoUnit;
+    }
+    public void setSomaPrecoUnit(Double somaPrecoUnit) {
+        this.somaPrecoUnit = somaPrecoUnit;
+    }
+
+    public Double getSomaPrecoTotal() {
+        return somaPrecoTotal;
+    }
+    public void setSomaPrecoTotal(Double somaPrecoTotal) {
+        this.somaPrecoTotal = somaPrecoTotal;
     }
     
     public void cadastrarOuAlterar(String nome, String dtInicial, String dtFinal,
