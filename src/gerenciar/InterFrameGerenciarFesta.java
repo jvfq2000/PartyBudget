@@ -6,9 +6,28 @@
 package gerenciar;
 
 import base_dados.BaseDados;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import funcao.Mensagem;
 import funcao.Validacoes;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,6 +46,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
 
         dtmCategoria = (DefaultTableModel) tableCategoria.getModel();
         dtmProduto = (DefaultTableModel) tableProduto.getModel();
+        cbbFesta.setSelectedIndex(0);
 
         for (int i = 0; i < BaseDados.listaFesta.size(); i++) {
             cbbFesta.addItem(BaseDados.listaFesta.get(i).getNome());
@@ -64,6 +84,13 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        txtCaminho = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtNomeArquivo = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         cbbFesta = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
@@ -173,9 +200,9 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Aplique as alterações feitas em seus produtos e iremos recalcular tudo para você:");
+        jLabel3.setText("Aplique as alterações feitas em seus produtos e refaça os cálculos com apenas 1 click:");
 
-        btnSalvarAlterProd.setText("Salvar Alterações");
+        btnSalvarAlterProd.setText("Salvar Alterações e Calcular Orçamento");
         btnSalvarAlterProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarAlterProdActionPerformed(evt);
@@ -294,6 +321,71 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
 
         painelDeAbas.addTab("Produtos", jPanel5);
 
+        jPanel2.setBackground(new java.awt.Color(0, 51, 102));
+
+        jButton1.setText("Buscar Diretório");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("*Selecione um local para salvar o arquivo:");
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("*Dê um nome para o seu relatório:");
+
+        jButton2.setText("Gerar Relatório");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))
+                            .addComponent(jLabel9)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(302, 302, 302)
+                        .addComponent(jButton2)))
+                .addContainerGap(266, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(39, 39, 39)
+                .addComponent(jButton2)
+                .addContainerGap(114, Short.MAX_VALUE))
+        );
+
+        painelDeAbas.addTab("Gerar Relatório", jPanel2);
+
         cbbFesta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
         cbbFesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -363,10 +455,14 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         } else {
             btnSalvarAlterCat.setEnabled(true);
             tableCategoria.setEnabled(true);
+            btnSalvarAlterProd.setEnabled(true);
+            tableProduto.setEnabled(true);
+            
             boolean catAdicionada;
 
             posFesta = cbbFesta.getSelectedIndex() - 1;
             labelNomeFesta.setText(BaseDados.listaFesta.get(posFesta).getNome());
+            labelNomeFesta2.setText(BaseDados.listaFesta.get(posFesta).getNome());
 
             for (int i = 0; i < BaseDados.listaCat.size(); i++) {
                 if (BaseDados.listaCat.get(i).getTipoCategoria().equals("PRODUTO")) {
@@ -405,14 +501,24 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                     }
                 }
             }
-            if (dtmCategoria.getRowCount() == 0) {
+
+            if (cbbFesta.getSelectedIndex() == 0) {
                 btnSalvarAlterCat.setEnabled(false);
-            }
-            if (dtmProduto.getRowCount() == 0) {
                 btnSalvarAlterProd.setEnabled(false);
+            } else {
+                if (dtmCategoria.getRowCount() == 0) {
+                    btnSalvarAlterCat.setEnabled(false);
+                } else {
+                    btnSalvarAlterCat.setEnabled(true);
+                }
+                if (dtmProduto.getRowCount() == 0) {
+                    btnSalvarAlterProd.setEnabled(false);
+                } else {
+                    btnSalvarAlterProd.setEnabled(true);
+                    preencherSomatório();
+                }
             }
         }
-        preencherSomatório();
     }//GEN-LAST:event_cbbFestaActionPerformed
 
     private void btnSalvarAlterCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAlterCatActionPerformed
@@ -466,7 +572,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                             for (int k = 0; k < BaseDados.listaFesta.get(posFesta).listaProduto.size(); k++) {
                                 if (BaseDados.listaFesta.get(posFesta).listaProduto.get(k).getCODIGO()
                                         == BaseDados.listaProduto.get(j).getCODIGO()) {
-                                    
+
                                     achei = true;
                                 }
                             }
@@ -488,7 +594,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         int posProduto = -1;
         double precoUni = 0, somaPrecoUni = 0, precoTotal = 0, somaPrecoTotal = 0;
 
-        for (int i = 0; i < tableProduto.getRowCount(); i++) {            
+        for (int i = 0; i < tableProduto.getRowCount(); i++) {
             if (dtmProduto.getValueAt(i, 6).equals(true)) {
                 BaseDados.listaFesta.get(posFesta).listaProduto.remove(i);
                 dtmProduto.removeRow(i);
@@ -496,7 +602,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
             } else {
                 codCodProduto = Integer.parseInt(dtmProduto.getValueAt(i, 0).toString());
                 posProduto = Validacoes.buscaProdutoFesta(posFesta, codCodProduto);
-                
+
                 qtd = Integer.parseInt(dtmProduto.getValueAt(i, 3).toString());
                 precoUni = Double.parseDouble(dtmProduto.getValueAt(i, 4).toString().replace(",", "."));
                 precoTotal = Double.parseDouble(dtmProduto.getValueAt(i, 5).toString().replace(",", "."));
@@ -518,12 +624,91 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         Mensagem.sucessoSalvarAlter();
     }//GEN-LAST:event_btnSalvarAlterProdActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFileChooser local = new JFileChooser();
+        local.setDialogTitle("Selecione a pasta");
+        local.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int opcao = local.showOpenDialog(this);
+        if (opcao == JFileChooser.APPROVE_OPTION) {
+            File file = new File("caminho");
+            file = local.getSelectedFile();
+            String caminho = file.getAbsolutePath();
+            txtCaminho.setText(caminho);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int nomeValido = 0;
+
+        if (txtCaminho.getText().equals("") || txtNomeArquivo.getText().equals("")) {
+            Mensagem.camposObrigatorios();
+        } else {
+            File salvarEscolhido = new File(txtCaminho.getText() + "\\" + txtNomeArquivo.getText() + ".pdf");
+            if (salvarEscolhido.exists() == true) {
+                nomeValido = JOptionPane.showConfirmDialog(rootPane, "Arquivo já existente, deseja substituir?", "Substituir", JOptionPane.YES_NO_OPTION);
+            }
+            if (nomeValido == JOptionPane.YES_OPTION) {
+                Document doc = new Document(PageSize.A4);
+                
+                try {
+                    PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream(txtCaminho.getText() + "\\" + txtNomeArquivo.getText() + ".pdf"));
+                    doc.open();
+                    Font fonte = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
+                    
+                    Paragraph cab = new Paragraph(cbbFesta.getSelectedItem().toString(), fonte);
+                    cab.setAlignment(Element.ALIGN_CENTER);
+
+                    //Imagem
+                    Image imagem = null;
+                    try {
+                        imagem = Image.getInstance("/imagem/party_budget.png");
+                    } catch (BadElementException | IOException ex) {
+                        JOptionPane.showMessageDialog(rootPane, "erro: " + ex.getMessage());
+                    }
+                    imagem.scaleAbsolute(40, 55);
+                    
+                    PdfPTable tableCab = new PdfPTable(2);
+
+                    tableCab.setWidths(new float[]{0.30f, 0.80f});
+                    tableCab.setTotalWidth(550);
+                    tableCab.setLockedWidth(true);
+                    tableCab.getDefaultCell().setFixedHeight(70);
+                    tableCab.getDefaultCell().setBorder(0);
+                    tableCab.getDefaultCell().setPaddingRight(130);
+
+                    tableCab.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+                    PdfPCell cellImagem = new PdfPCell(imagem);
+                    cellImagem.setBorder(0);
+                    tableCab.addCell(cellImagem);
+                    tableCab.addCell(cab);
+                    doc.add(tableCab);
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Gerado com sucesso");
+                    Desktop.getDesktop().open(new File(txtCaminho.getText() + "\\" + txtNomeArquivo.getText() + ".pdf"));
+                    //PdfPTable table = new PdfPTable(6);
+                    //table.setWidths(new int[]{60, 65, 45, 70, 70, 70, 70, 35});
+                    
+                } catch (FileNotFoundException ex) {
+                    Mensagem.personalizada("Não foi possível gerar o relatório!");
+                } catch (DocumentException ex) {
+                    Mensagem.personalizada("Não foi possível gerar o relatório!");
+                } catch (IOException ex) {
+                    Logger.getLogger(InterFrameGerenciarFesta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvarAlterCat;
     private javax.swing.JButton btnSalvarAlterProd;
     private javax.swing.JComboBox<String> cbbFesta;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -531,7 +716,9 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
@@ -541,6 +728,8 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane painelDeAbas;
     private javax.swing.JTable tableCategoria;
     private javax.swing.JTable tableProduto;
+    private javax.swing.JTextField txtCaminho;
+    private javax.swing.JTextField txtNomeArquivo;
     private javax.swing.JTextField txtSomaPrecoTotal;
     private javax.swing.JTextField txtSomaPrecoUni;
     private javax.swing.JTextField txtSomaQtd;

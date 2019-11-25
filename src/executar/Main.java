@@ -22,7 +22,7 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/icone/editado.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagem/party_budget.png"));
         Image image = icon.getImage();
         dpanelPrincipal = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
