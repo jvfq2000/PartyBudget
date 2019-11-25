@@ -202,6 +202,12 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
             tableProduto.getColumnModel().getColumn(3).setMinWidth(80);
         }
 
+        txtSomaQtd.setEditable(false);
+
+        txtSomaPrecoUni.setEditable(false);
+
+        txtSomaPrecoTotal.setEditable(false);
+
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Somatórios:");
@@ -363,7 +369,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
 
     private void btnSalvarAlterCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAlterCatActionPerformed
         if (Mensagem.confirmarSalvarAlter() == JOptionPane.YES_OPTION) {
-            int posFesta = cbbFesta.getSelectedIndex() - 1;
+            posFesta = cbbFesta.getSelectedIndex() - 1;
             int posCatProd;
             boolean achei;
 
@@ -423,6 +429,10 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
             somaQtd = Integer.parseInt(dtmProduto.getValueAt(i, 3).toString());
             somaPrecoUni = Double.parseDouble(dtmProduto.getValueAt(i, 4).toString());
             somaPrecoTotal = Double.parseDouble(dtmProduto.getValueAt(i, 5).toString());
+            
+            BaseDados.listaFesta.get(posFesta).listaProduto.get(i).setSomaQtd(somaQtd);
+            BaseDados.listaFesta.get(posFesta).listaProduto.get(i).setSomaPrecoUnit(somaPrecoUni);
+            BaseDados.listaFesta.get(posFesta).listaProduto.get(i).setSomaPrecoTotal(somaPrecoTotal);
         }
         
         txtSomaQtd.setText(String.valueOf(somaQtd));
