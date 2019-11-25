@@ -8,6 +8,7 @@ package gerenciar;
 import base_dados.BaseDados;
 import funcao.Mensagem;
 import funcao.Validacoes;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,9 +31,6 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         for (int i = 0; i < BaseDados.listaFesta.size(); i++) {
             cbbFesta.addItem(BaseDados.listaFesta.get(i).getNome());
         }
-
-        tableCategoria.setEnabled(false);
-        btnSalvarAlterCat.setEnabled(false);
     }
 
     /**
@@ -65,6 +63,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         cbbFesta = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
@@ -230,7 +229,11 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 153, 0));
-        jLabel7.setText("Utilize \".\"(ponto) ao invés de \",\"(vírgula).");
+        jLabel7.setText("Após alterar um valor, pressione [Enter], para verificar se é um valor válido.");
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel8.setText("Utilize \".\"(ponto) ao invés de \",\"(vírgula).");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -258,7 +261,8 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -279,7 +283,9 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                     .addComponent(txtSomaPrecoUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSomaPrecoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(5, 5, 5)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -398,6 +404,12 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                         });
                     }
                 }
+            }
+            if (dtmCategoria.getRowCount() == 0) {
+                btnSalvarAlterCat.setEnabled(false);
+            }
+            if (dtmProduto.getRowCount() == 0) {
+                btnSalvarAlterProd.setEnabled(false);
             }
         }
         preencherSomatório();
@@ -518,6 +530,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
