@@ -20,43 +20,103 @@ public class BaseDados {
 
     public void cadastrar() {
         categoria = new Categoria();
-        categoria.cadastrarOuAlterar("BEBIDAS", "PRODUTO");
+        categoria.cadastrarOuAlterar("BEBIDAS ALCOOLICAS", "PRODUTO");
         BaseDados.listaCat.add(categoria);
-
         categoria = new Categoria();
-        categoria.cadastrarOuAlterar("COMIDAS", "PRODUTO");
+        categoria.cadastrarOuAlterar("BEBIDAS NÃO ALCOOLICAS", "PRODUTO");
         BaseDados.listaCat.add(categoria);
-
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("COMIDAS GERAIS", "PRODUTO");
+        BaseDados.listaCat.add(categoria);
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("CARNES", "PRODUTO");
+        BaseDados.listaCat.add(categoria);
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("DESCARTÁVEIS", "PRODUTO");
+        BaseDados.listaCat.add(categoria);
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("DOCES", "PRODUTO");
+        BaseDados.listaCat.add(categoria);
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("SALGADOS", "PRODUTO");
+        BaseDados.listaCat.add(categoria);
+        
+        
+        
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("15 ANOS", "FESTA");
+        BaseDados.listaCat.add(categoria);
         categoria = new Categoria();
         categoria.cadastrarOuAlterar("ANIVERSÁRIO", "FESTA");
         BaseDados.listaCat.add(categoria);
-
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("BODAS", "FESTA");
+        BaseDados.listaCat.add(categoria);
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("BATIZADO", "FESTA");
+        BaseDados.listaCat.add(categoria);
         categoria = new Categoria();
         categoria.cadastrarOuAlterar("CASAMENTO", "FESTA");
         BaseDados.listaCat.add(categoria);
-
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("CHÁ DE PANELA", "FESTA");
+        BaseDados.listaCat.add(categoria);
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("INFANTIL", "FESTA");
+        BaseDados.listaCat.add(categoria);
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("NO TRABALHO", "FESTA");
+        BaseDados.listaCat.add(categoria);
+        categoria = new Categoria();
+        categoria.cadastrarOuAlterar("FORMATURA", "FESTA");
+        BaseDados.listaCat.add(categoria);
+        
+        
+        
         festa = new Festa();
         festa.cadastrarOuAlterar("FESTA DE ANIVERSÁRIO", "01/11/2019", "01/11/2019", "15:00", "20:00", "LOCAL ANIVERSARIO", "", 3);
         BaseDados.listaFesta.add(festa);
-        
         festa = new Festa();
         festa.cadastrarOuAlterar("FESTA DE CASAMENTO", "01/11/2019", "01/11/2019", "15:00", "15:00", "LOCAL CASAMENTO", "", 4);
         BaseDados.listaFesta.add(festa);
         
-        produto = new Produto();
-        produto.cadastrarOuAlterar("REFRIGERANTE LATA 500ML", 50, 2.5, 1);
-        BaseDados.listaProduto.add(produto);
+        
         
         produto = new Produto();
-        produto.cadastrarOuAlterar("SUCO LATA 600ML", 30, 2.5, 1);
+        produto.cadastrarOuAlterar("REFRIGERANTE LATA 500ML", 70, 2.99, 2);
         BaseDados.listaProduto.add(produto);
-
         produto = new Produto();
-        produto.cadastrarOuAlterar("BIFE 1KG", 5, 10, 2);
+        produto.cadastrarOuAlterar("SUCO LATA 600ML", 50, 2.5, 2);
         BaseDados.listaProduto.add(produto);
-        
         produto = new Produto();
-        produto.cadastrarOuAlterar("ALFACE 1PÉ", 3, 3, 2);
+        produto.cadastrarOuAlterar("ÁGUA MINERAL 500ML", 100, 2, 2);
+        BaseDados.listaProduto.add(produto);
+        produto = new Produto();
+        produto.cadastrarOuAlterar("ENERGÉTICO", 60, 7.59, 2);
+        BaseDados.listaProduto.add(produto);
+        produto = new Produto();
+        produto.cadastrarOuAlterar("CERVEJA LATA 600ML", 70, 3.78, 1);
+        BaseDados.listaProduto.add(produto);
+        produto = new Produto();
+        produto.cadastrarOuAlterar("CHOPP 10L", 2, 120, 1);
+        BaseDados.listaProduto.add(produto);
+        produto = new Produto();
+        produto.cadastrarOuAlterar("VODKA 1L", 10, 32.69, 1);
+        BaseDados.listaProduto.add(produto);
+        produto = new Produto();
+        produto.cadastrarOuAlterar("COLHER PCT 20UN", 10, 2.46, 5);
+        BaseDados.listaProduto.add(produto);
+        produto = new Produto();
+        produto.cadastrarOuAlterar("COPO PCT 100UN", 2, 3.67, 5);
+        BaseDados.listaProduto.add(produto);
+        produto = new Produto();
+        produto.cadastrarOuAlterar("PRATO PCT 20UN", 10, 2.83, 5);
+        BaseDados.listaProduto.add(produto);
+        produto = new Produto();
+        produto.cadastrarOuAlterar("GUARDANAPO PCT 50UN", 4, 4, 5);
+        BaseDados.listaProduto.add(produto);
+        produto = new Produto();
+        produto.cadastrarOuAlterar("ESQUEIRO", 2, 2.5, 7);
         BaseDados.listaProduto.add(produto);
     }
 }

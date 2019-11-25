@@ -395,10 +395,10 @@ public class InterFrameProduto extends javax.swing.JInternalFrame {
                     listaCodCat[cbbCategoria.getSelectedIndex() - 1]
             );
             dtm.setValueAt(BaseDados.listaProduto.get(posProduto).getCODIGO(), posProduto, 0);
-            dtm.setValueAt(BaseDados.listaProduto.get(posProduto).getNome(), posProduto, 0);
+            dtm.setValueAt(BaseDados.listaProduto.get(posProduto).getNome(), posProduto, 1);
             dtm.setValueAt(BaseDados.listaCat.get(posCat).getNome(), posProduto, 2);
-            dtm.setValueAt(BaseDados.listaProduto.get(posProduto).getQuantidade(), posProduto, 0);
-            dtm.setValueAt(BaseDados.listaProduto.get(posProduto).getPrecoUnitario(), posProduto, 0);
+            dtm.setValueAt(BaseDados.listaProduto.get(posProduto).getQuantidade(), posProduto, 3);
+            dtm.setValueAt(BaseDados.listaProduto.get(posProduto).getPrecoUnitario(), posProduto, 4);
 
             btnCadastrar.setText("Cadastrar");
             camposInicio();

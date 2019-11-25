@@ -58,6 +58,10 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         btnSalvarAlterProd = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableProduto = new javax.swing.JTable();
+        txtSomaQtd = new javax.swing.JTextField();
+        txtSomaPrecoUni = new javax.swing.JTextField();
+        txtSomaPrecoTotal = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         cbbFesta = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
@@ -67,11 +71,6 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
 
         painelDeAbas.setBackground(new java.awt.Color(0, 51, 102));
-        painelDeAbas.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                painelDeAbasComponentShown(evt);
-            }
-        });
 
         jPanel4.setBackground(new java.awt.Color(0, 51, 102));
 
@@ -108,15 +107,15 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tableCategoria);
         if (tableCategoria.getColumnModel().getColumnCount() > 0) {
             tableCategoria.getColumnModel().getColumn(0).setMaxWidth(60);
-            tableCategoria.getColumnModel().getColumn(1).setMinWidth(120);
+            tableCategoria.getColumnModel().getColumn(1).setMinWidth(200);
             tableCategoria.getColumnModel().getColumn(2).setMinWidth(80);
         }
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Adicione as categorias de produto mais convenientes");
+        jLabel2.setText("Adicione as categorias de produtos mais convenientes:");
 
-        labelNomeFesta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        labelNomeFesta.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         labelNomeFesta.setForeground(new java.awt.Color(204, 204, 204));
         labelNomeFesta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -128,11 +127,15 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelNomeFesta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalvarAlterCat)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 126, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSalvarAlterCat, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(139, 139, 139)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -153,13 +156,13 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
 
         jPanel5.setBackground(new java.awt.Color(0, 51, 102));
 
-        labelNomeFesta2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        labelNomeFesta2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         labelNomeFesta2.setForeground(new java.awt.Color(204, 204, 204));
         labelNomeFesta2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Atualizar produtos de acordo com as categorias selecionadas:");
+        jLabel3.setText("Aplique as alterações feitas em seus produtos e iremos recalcular tudo para você:");
 
         btnSalvarAlterProd.setText("Salvar Alterações");
         btnSalvarAlterProd.addActionListener(new java.awt.event.ActionListener() {
@@ -177,10 +180,10 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, true, false, true
+                false, false, false, true, true, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -194,10 +197,14 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tableProduto);
         if (tableProduto.getColumnModel().getColumnCount() > 0) {
             tableProduto.getColumnModel().getColumn(0).setMaxWidth(60);
-            tableProduto.getColumnModel().getColumn(1).setMinWidth(120);
-            tableProduto.getColumnModel().getColumn(2).setMinWidth(70);
+            tableProduto.getColumnModel().getColumn(1).setMinWidth(200);
+            tableProduto.getColumnModel().getColumn(2).setMinWidth(120);
             tableProduto.getColumnModel().getColumn(3).setMinWidth(80);
         }
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Somatórios:");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -207,12 +214,22 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelNomeFesta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalvarAlterProd)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(txtSomaQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtSomaPrecoUni, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtSomaPrecoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(116, 116, 116))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +242,13 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                     .addComponent(btnSalvarAlterProd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSomaQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSomaPrecoUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSomaPrecoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71))
         );
 
         painelDeAbas.addTab("Produtos", jPanel5);
@@ -261,7 +284,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                     .addComponent(cbbFesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(painelDeAbas, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE))
+                .addComponent(painelDeAbas))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -322,14 +345,14 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                     if (BaseDados.listaFesta.get(posFesta).listaCatProduto.get(i).getCODIGO()
                             == BaseDados.listaFesta.get(posFesta).listaProduto.get(j).getCodCategoria()) {
 
-                        dtmCategoria.addRow(new Object[]{
+                        dtmProduto.addRow(new Object[]{
                             BaseDados.listaFesta.get(posFesta).listaProduto.get(j).getCODIGO(),
                             BaseDados.listaFesta.get(posFesta).listaProduto.get(j).getNome(),
                             BaseDados.listaFesta.get(posFesta).listaCatProduto.get(i).getNome(),
                             BaseDados.listaFesta.get(posFesta).listaProduto.get(j).getQuantidade(),
                             BaseDados.listaFesta.get(posFesta).listaProduto.get(j).getPrecoUnitario(),
                             BaseDados.listaFesta.get(posFesta).listaProduto.get(j).getQuantidade()
-                            * BaseDados.listaFesta.get(posFesta).listaProduto.get(j).getPrecoUnitario(),
+                                * BaseDados.listaFesta.get(posFesta).listaProduto.get(j).getPrecoUnitario(),
                             false
                         });
                     }
@@ -363,20 +386,26 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                         if (BaseDados.listaFesta.get(posFesta).listaCatProduto.get(posCatProd).getCODIGO()
                                 == BaseDados.listaFesta.get(posFesta).listaProduto.get(j).getCodCategoria()) {
 
+                            System.out.println("Removendo o produto: "+BaseDados.listaFesta.get(posFesta).listaProduto.get(j).getCODIGO()+""
+                                    + ".  Da catetegoria: "+BaseDados.listaFesta.get(posFesta).listaCatProduto.get(posCatProd).getCODIGO());
                             BaseDados.listaFesta.get(posFesta).listaProduto.remove(j);
+                            j--;
                         }
                     }
+                    System.out.println("Removendo a categoria: "+BaseDados.listaFesta.get(posFesta).listaCatProduto.get(posCatProd).getCODIGO());
                     BaseDados.listaFesta.get(posFesta).listaCatProduto.remove(posCatProd);
                     
                 } else if (!achei && dtmCategoria.getValueAt(i, 2).equals(true)) {
                     int posCatBusca = Validacoes.buscaCategoria(codCat);
                     BaseDados.listaFesta.get(posFesta).listaCatProduto.add(BaseDados.listaCat.get(posCatBusca));
+                    System.out.println("Adicionou a categoria: "+BaseDados.listaFesta.get(posFesta).listaCatProduto.get(BaseDados.listaFesta.get(posFesta).listaCatProduto.size()-1).getCODIGO());
                     
-                    for (int j = 0; j < BaseDados.listaFesta.get(posFesta).listaProduto.size(); j++) {
-                        if (BaseDados.listaFesta.get(posFesta).listaCatProduto.get(posCatBusca).getCODIGO()
+                    for (int j = 0; j < BaseDados.listaProduto.size(); j++) {
+                        if (BaseDados.listaCat.get(posCatBusca).getCODIGO()
                                 == BaseDados.listaProduto.get(j).getCodCategoria()) {
 
                             BaseDados.listaFesta.get(posFesta).listaProduto.add(BaseDados.listaProduto.get(j));
+                            System.out.println("Adicionou o produto: "+BaseDados.listaFesta.get(posFesta).listaProduto.get(BaseDados.listaFesta.get(posFesta).listaProduto.size()-1).getCODIGO());
                         }
                     }
                 }
@@ -386,12 +415,19 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSalvarAlterCatActionPerformed
 
-    private void painelDeAbasComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_painelDeAbasComponentShown
-
-    }//GEN-LAST:event_painelDeAbasComponentShown
-
     private void btnSalvarAlterProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAlterProdActionPerformed
-        // TODO add your handling code here:
+        int somaQtd = 0;
+        double somaPrecoUni = 0, somaPrecoTotal = 0;
+        
+        for (int i = 0; i < tableProduto.getRowCount(); i++) {
+            somaQtd = Integer.parseInt(dtmProduto.getValueAt(i, 3).toString());
+            somaPrecoUni = Double.parseDouble(dtmProduto.getValueAt(i, 4).toString());
+            somaPrecoTotal = Double.parseDouble(dtmProduto.getValueAt(i, 5).toString());
+        }
+        
+        txtSomaQtd.setText(String.valueOf(somaQtd));
+        txtSomaPrecoUni.setText(String.valueOf(somaPrecoUni));
+        txtSomaPrecoTotal.setText(String.valueOf(somaPrecoTotal));
     }//GEN-LAST:event_btnSalvarAlterProdActionPerformed
 
 
@@ -402,6 +438,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -412,5 +449,8 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane painelDeAbas;
     private javax.swing.JTable tableCategoria;
     private javax.swing.JTable tableProduto;
+    private javax.swing.JTextField txtSomaPrecoTotal;
+    private javax.swing.JTextField txtSomaPrecoUni;
+    private javax.swing.JTextField txtSomaQtd;
     // End of variables declaration//GEN-END:variables
 }
