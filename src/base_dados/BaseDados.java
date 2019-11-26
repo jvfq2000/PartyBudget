@@ -67,18 +67,8 @@ public class BaseDados {
         categoria = new Categoria();
         categoria.cadastrarOuAlterar("NO TRABALHO", "FESTA");
         BaseDados.listaCat.add(categoria);
-        categoria = new Categoria();
-        categoria.cadastrarOuAlterar("FORMATURA", "FESTA");
-        BaseDados.listaCat.add(categoria);
         
         
-        
-        festa = new Festa();
-        festa.cadastrarOuAlterar("FESTA DE ANIVERSÁRIO", "01/11/2019", "01/11/2019", "15:00", "20:00", "LOCAL ANIVERSARIO", "", 3);
-        BaseDados.listaFesta.add(festa);
-        festa = new Festa();
-        festa.cadastrarOuAlterar("FESTA DE CASAMENTO", "01/11/2019", "01/11/2019", "15:00", "15:00", "LOCAL CASAMENTO", "", 4);
-        BaseDados.listaFesta.add(festa);
         
         
         

@@ -7,6 +7,7 @@ package gerenciar;
 
 import base_dados.BaseDados;
 import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -36,7 +37,8 @@ import javax.swing.table.DefaultTableModel;
  * @author ji
  */
 public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
-
+    
+    DecimalFormat formato = new DecimalFormat("#.##");
     private DefaultTableModel dtmCategoria;
     private DefaultTableModel dtmProduto;
     private int posFesta;
@@ -90,7 +92,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtNomeArquivo = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnGerar = new javax.swing.JButton();
         cbbFesta = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
@@ -338,10 +340,10 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("*Dê um nome para o seu relatório:");
 
-        jButton2.setText("Gerar Relatório");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnGerar.setText("Gerar Relatório");
+        btnGerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnGerarActionPerformed(evt);
             }
         });
 
@@ -350,26 +352,24 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(277, 277, 277)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
-                            .addComponent(jLabel9)))
+                        .addComponent(txtCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
+                    .addComponent(jLabel9)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(302, 302, 302)
-                        .addComponent(jButton2)))
-                .addContainerGap(266, Short.MAX_VALUE))
+                        .addGap(97, 97, 97)
+                        .addComponent(btnGerar)))
+                .addContainerGap(289, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(97, 97, 97)
+                .addGap(81, 81, 81)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,8 +380,8 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                     .addComponent(txtCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(39, 39, 39)
-                .addComponent(jButton2)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addComponent(btnGerar)
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         painelDeAbas.addTab("Gerar Relatório", jPanel2);
@@ -435,9 +435,9 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void preencherSomatório() {
-        txtSomaQtd.setText(String.valueOf(BaseDados.listaFesta.get(posFesta).getSomaQtd()));
-        txtSomaPrecoUni.setText(String.valueOf(BaseDados.listaFesta.get(posFesta).getSomaPrecoUnit()));
-        txtSomaPrecoTotal.setText(String.valueOf(BaseDados.listaFesta.get(posFesta).getSomaPrecoTotal()));
+        txtSomaQtd.setText(String.valueOf(formato.format(BaseDados.listaFesta.get(posFesta).getSomaQtd())));
+        txtSomaPrecoUni.setText(String.valueOf(formato.format(BaseDados.listaFesta.get(posFesta).getSomaPrecoUnit())));
+        txtSomaPrecoTotal.setText(String.valueOf(formato.format(BaseDados.listaFesta.get(posFesta).getSomaPrecoTotal())));
     }
 
     private void cbbFestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbFestaActionPerformed
@@ -447,6 +447,7 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         if (cbbFesta.getSelectedIndex() == 0) {
             btnSalvarAlterCat.setEnabled(false);
             tableCategoria.setEnabled(false);
+            btnGerar.setEnabled(false);
             labelNomeFesta.setText("");
 
             btnSalvarAlterProd.setEnabled(false);
@@ -456,8 +457,9 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
             btnSalvarAlterCat.setEnabled(true);
             tableCategoria.setEnabled(true);
             btnSalvarAlterProd.setEnabled(true);
+            btnGerar.setEnabled(true);
             tableProduto.setEnabled(true);
-            
+
             boolean catAdicionada;
 
             posFesta = cbbFesta.getSelectedIndex() - 1;
@@ -638,24 +640,24 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarActionPerformed
         int nomeValido = 0;
 
         if (txtCaminho.getText().equals("") || txtNomeArquivo.getText().equals("")) {
             Mensagem.camposObrigatorios();
         } else {
-            File salvarEscolhido = new File(txtCaminho.getText() + "\\" + txtNomeArquivo.getText() + ".pdf");
+            File salvarEscolhido = new File(txtCaminho.getText() + "//" + txtNomeArquivo.getText() + ".pdf");
             if (salvarEscolhido.exists() == true) {
                 nomeValido = JOptionPane.showConfirmDialog(rootPane, "Arquivo já existente, deseja substituir?", "Substituir", JOptionPane.YES_NO_OPTION);
             }
             if (nomeValido == JOptionPane.YES_OPTION) {
                 Document doc = new Document(PageSize.A4);
-                
+
                 try {
                     PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream(txtCaminho.getText() + "\\" + txtNomeArquivo.getText() + ".pdf"));
                     doc.open();
                     Font fonte = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
-                    
+
                     Paragraph cab = new Paragraph(cbbFesta.getSelectedItem().toString(), fonte);
                     cab.setAlignment(Element.ALIGN_CENTER);
 
@@ -666,8 +668,8 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                     } catch (BadElementException | IOException ex) {
                         JOptionPane.showMessageDialog(rootPane, "erro: " + ex.getMessage());
                     }
-                    imagem.scaleAbsolute(40, 55);
-                    
+                    imagem.scaleAbsolute(55, 40);
+
                     PdfPTable tableCab = new PdfPTable(2);
 
                     tableCab.setWidths(new float[]{0.30f, 0.80f});
@@ -683,11 +685,57 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                     tableCab.addCell(cellImagem);
                     tableCab.addCell(cab);
                     doc.add(tableCab);
+
+                    PdfPTable table = new PdfPTable(5);
+                    table.setWidths(new int[]{100, 100, 40, 40, 40});
+
+                    Font f = new Font(Font.FontFamily.TIMES_ROMAN, 7, Font.BOLD, BaseColor.WHITE);
+                    Font f1 = new Font(Font.FontFamily.TIMES_ROMAN, 7);
+
+                    PdfPCell descricao = new PdfPCell(new Paragraph("DESCRIÇÃO", f));
+                    descricao.setBackgroundColor(BaseColor.DARK_GRAY);
+                    PdfPCell categoria = new PdfPCell(new Paragraph("CATEGORIA", f));
+                    categoria.setBackgroundColor(BaseColor.DARK_GRAY);
+                    PdfPCell quantidade = new PdfPCell(new Paragraph("QUANTIDADE", f));
+                    quantidade.setBackgroundColor(BaseColor.DARK_GRAY);
+                    PdfPCell valorUnitario = new PdfPCell(new Paragraph("VALOR UNITÁRIO", f));
+                    valorUnitario.setBackgroundColor(BaseColor.DARK_GRAY);
+                    PdfPCell valorTotal = new PdfPCell(new Paragraph("VALOR TOTAL", f));
+                    valorTotal.setBackgroundColor(BaseColor.DARK_GRAY);
+
+                    table.addCell(descricao);
+                    table.addCell(categoria);
+                    table.addCell(quantidade);
+                    table.addCell(valorUnitario);
+                    table.addCell(valorTotal);
                     
+                    Font p = new Font(Font.FontFamily.TIMES_ROMAN, 12);
+                    Font p2 = new Font(Font.FontFamily.TIMES_ROMAN, 9);
+                    
+                    for (int i = 0; i < tableProduto.getRowCount(); i++) {
+                        Paragraph pDescricao = new Paragraph(tableProduto.getValueAt(i, 1).toString(), f1);
+                        Paragraph pCategoria = new Paragraph(tableProduto.getValueAt(i, 2).toString(), f1);
+                        Paragraph pQuantidade = new Paragraph(tableProduto.getValueAt(i, 3).toString(), f1);
+                        Paragraph pValorUnit = new Paragraph(formato.format(tableProduto.getValueAt(i, 4)).toString(), f1);
+                        Paragraph pValorTotal = new Paragraph(formato.format(tableProduto.getValueAt(i, 5)).toString(), f1);
+
+                        table.addCell(pDescricao);
+                        table.addCell(pCategoria);
+                        table.addCell(pQuantidade);
+                        table.addCell(pValorUnit);
+                        table.addCell(pValorTotal);
+                    }
+                    
+                    Paragraph somatorio = new Paragraph("\n"+txtSomaQtd.getText()+"    |    R$ "+txtSomaPrecoUni.getText()+"   |     R$"+txtSomaPrecoTotal.getText()+""
+                            + "                         ",p2);
+                            somatorio.setAlignment(Element.ALIGN_RIGHT);
+                    
+                    doc.add(table);
+                    doc.add(somatorio);
+
+                    doc.close();
                     JOptionPane.showMessageDialog(rootPane, "Gerado com sucesso");
                     Desktop.getDesktop().open(new File(txtCaminho.getText() + "\\" + txtNomeArquivo.getText() + ".pdf"));
-                    //PdfPTable table = new PdfPTable(6);
-                    //table.setWidths(new int[]{60, 65, 45, 70, 70, 70, 70, 35});
                     
                 } catch (FileNotFoundException ex) {
                     Mensagem.personalizada("Não foi possível gerar o relatório!");
@@ -698,15 +746,15 @@ public class InterFrameGerenciarFesta extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnGerarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGerar;
     private javax.swing.JButton btnSalvarAlterCat;
     private javax.swing.JButton btnSalvarAlterProd;
     private javax.swing.JComboBox<String> cbbFesta;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
