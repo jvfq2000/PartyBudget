@@ -460,8 +460,7 @@ public class InterFrameFesta extends javax.swing.JInternalFrame {
             dtFim.setTime(dcDataFinal.getDate());
 
             if (dtFim.getTimeInMillis() < dtIni.getTimeInMillis()) {
-                Mensagem.personalizada("A 'Data Final' não pode ser menor que a 'Data Inicial'!\n"
-                        + "Tesete: " + dtFim.getTimeInMillis() + " < " + dtIni.getTimeInMillis());
+                Mensagem.personalizada("A 'Data Final' não pode ser menor que a 'Data Inicial'!");
 
             } else if (!Validacoes.validaDataOuHora(formatHoraInicio.getText(), "HH:mm")) {
                 Mensagem.personalizada("Horáio inicial inválido!");
@@ -479,8 +478,7 @@ public class InterFrameFesta extends javax.swing.JInternalFrame {
                     hrFim.setTime(formatoHora.parse(formatHoraFim.getText()));
 
                     if (hrFim.getTimeInMillis() < hrIni.getTimeInMillis()) {
-                        Mensagem.personalizada("O Horário Final deve ser maior ou igual ao Horário Inicial!"
-                                + "Tesete: " + hrFim.getTimeInMillis() + " < " + hrIni.getTimeInMillis());
+                        Mensagem.personalizada("O Horário Final deve ser maior ou igual ao Horário Inicial!");
 
                     } else if (btnCadastrar.getText().equals("Cadastrar")) {
                         novaFesta.cadastrarOuAlterar(
